@@ -1,5 +1,5 @@
-
-var http = require('http')
+var http = require('http');
+var mysql = require('mysql');
 
 var port = 4000
 
