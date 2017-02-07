@@ -11,8 +11,15 @@
   "author": "Jeremiah Gibson <jeremiah72654@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "firebase": "^3.6.8",
+    "firebase-admin": "^4.1.0",
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "debug": "^2.6.0",
+    "nodemon": "^1.11.0",
+    "winston": "^2.3.1"
   }
 }

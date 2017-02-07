@@ -1,13 +1,31 @@
-var http = require('http');
-var mysql = require('mysql');
+var express = require("express");
+var bodyParser = require("body-parser");
+var firebase = require('firebase-admin');
+var firebaseAdmin = require("firebase-admin");
+var app = express();
 
-var port = 4000
+// Logging
+const winston = require('winston')
+// winston.log('info', 'Hello distributed log files!');
+// winston.info('Hello again distributed logs');
+// winston.level = 'debug';
+// winston.log('debug', 'Now my debug messages are written to console!');
 
-var server = http.createServer(function (request, response) {
-  response.writeHead(200, {'Content-Type': 'text/plain'})
-  response.end('Hello World Test2\n')
-})
+// Admin credentials
+const credentials = {
+  credential: firebaseAdmin.credential.cert("serviceAccountKey.json"),
+  databaseURL: "https://homebase-2e648.firebaseio.com"
+}
 
-server.listen(port)
+app.adminApp = firebaseAdmin.initializeApp(credentials);
+app.adminDB = app.adminApp.database();
+app.adminMessaging = app.adminApp.messaging();
 
-console.log('Server running at http://localhost:' + port)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+ 
+var routes = require("./src/routes.js")(app);
+ 
+var server = app.listen(process.env.NODE_PORT, function () {
+    console.log("Listening on port %s...", server.address().port);
+});

@@ -5,4 +5,7 @@ services:
     ports:
      - "80:4000"
     volumes:
-     - .:/src
+     - .:/usr/src
+    environment:
+     - NODE_PORT=4000
+     - DEBUG=my-namespace
