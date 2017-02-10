@@ -1,28 +1,31 @@
+var Library = require('./library');
+const winston = require('winston')
+		 
 var appRouter = function(app) {
+	var library = new Library(app);
   // Routes
   app.get("/", function(req, res) {
     res.send("Hello World");
 	}); 
 
-  // TODO Store tokens sent to route in admin only database that /message/send reads from
   app.post("/message/add/:token", function(req, res) {
-    res.send(req.params);
+		library.set(req.params.token);
+    res.send(req.params.token);
   });
 
-  // Send message to all devices
-  // TODO get tokens-devices from array available only to admin
   app.post("/message/send", function(req, res) {
+		var registrationTokens = [];
     var payload = {
       notification: {
-        title: "hello",
-        body: "world"
+        title: req.body.title,
+        body: req.body.body
       }
     };
-    var registrationTokens = [
-      "cHJYoxuWpUc:APA91bGuo2npGYNsMlGXaDmskptOUXbtAq36GyfV9pQkCxaNcAU7N73P8Pyox31iOdyUvl3l-LxfXGN1nrujeLWZ3GKKg25sJcHSPkvHaadRedWohQDJEEW8SVMZToZ7RTRjYtBDoNdh"
-    ];
-    app.adminMessaging.sendToDevice(registrationTokens, payload);
-    res.send('Message sent!');
+    library.getTokens(function(registrationTokensObject) {
+			registrationTokens = Object.keys(registrationTokensObject);
+			app.adminMessaging.sendToDevice(registrationTokens, payload);
+			res.send('Message sent!');
+		});
   });
 }
  

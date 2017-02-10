@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var firebase = require('firebase-admin');
 var firebaseAdmin = require("firebase-admin");
+
 var app = express();
 
 // Logging
@@ -25,7 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
  
 var routes = require("./src/routes.js")(app);
- 
+
 var server = app.listen(process.env.NODE_PORT, function () {
     console.log("Listening on port %s...", server.address().port);
 });
+
