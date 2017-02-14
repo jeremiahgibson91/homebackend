@@ -8,9 +8,10 @@ var appRouter = function(app) {
     res.send("Hello World");
 	}); 
 
-  app.post("/message/add/:token", function(req, res) {
-		library.set(req.params.token);
-    res.send(req.params.token);
+  app.post("/message/add", function(req, res) {
+    var token = req.body.token;
+		library.set(token);
+    res.send(JSON.stringify({token}));
   });
 
   app.post("/message/send", function(req, res) {
