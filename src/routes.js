@@ -6,7 +6,8 @@ var appRouter = function(app) {
 
   app.post("/message/add", function(req, res) {
     var token = req.body.token;
-		app.library.set(token);
+    var ua = req.headers['user-agent'];
+		app.library.set(token, ua);
     res.send(JSON.stringify({token}));
   });
 

@@ -9,10 +9,12 @@ function Library(app) {
         callback(snapshot.val());
       });
     },
-    set: function(token) {
+    set: function(token, ua) {
       var db = app.adminDB;
       var ref = db.ref("registration_tokens").child(token);
-      ref.set({test: 'sblah'} , function(err){
+      ref.set({
+        userAgent: ua 
+      } , function(err){
         if (err) {
           app.logger.log('debug', err);
         }	
