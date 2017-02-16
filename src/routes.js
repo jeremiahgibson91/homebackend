@@ -1,8 +1,4 @@
-var Library = require('./library');
-const winston = require('winston')
-		 
 var appRouter = function(app) {
-	var library = new Library(app);
   // Routes
   app.get("/", function(req, res) {
     res.send("Hello World");
@@ -10,7 +6,7 @@ var appRouter = function(app) {
 
   app.post("/message/add", function(req, res) {
     var token = req.body.token;
-		library.set(token);
+		app.library.set(token);
     res.send(JSON.stringify({token}));
   });
 
@@ -22,7 +18,7 @@ var appRouter = function(app) {
         body: req.body.body
       }
     };
-    library.getTokens(function(registrationTokensObject) {
+    app.library.getTokens(function(registrationTokensObject) {
 			registrationTokens = Object.keys(registrationTokensObject);
 			app.adminMessaging.sendToDevice(registrationTokens, payload);
 			res.send('Message sent!');

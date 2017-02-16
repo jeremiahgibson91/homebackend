@@ -4,8 +4,6 @@ var bodyParser = require("body-parser");
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
-const winston = require('winston')
-
 function Config(app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,7 +44,7 @@ function Config(app) {
     .use(jwtCheck
     // Routes that don't need to be secured
     .unless({path: [
-      '/message/add' 
+      '/message/add'// block get 
     ]}));
 }
 

@@ -1,31 +1,12 @@
 var express = require("express");
-var firebase = require('firebase-admin');
-var firebaseAdmin = require("firebase-admin");
-
 var app = express();
 
-// Logging
-const winston = require('winston')
-// winston.log('info', 'Hello distributed log files!');
-// winston.info('Hello again distributed logs');
-// winston.level = 'debug';
-// winston.log('debug', 'Now my debug messages are written to console!');
-
-// Admin credentials
-const credentials = {
-  credential: firebaseAdmin.credential.cert("serviceAccountKey.json"),
-  databaseURL: "https://homebase-2e648.firebaseio.com"
-}
-
-app.adminApp = firebaseAdmin.initializeApp(credentials);
-app.adminDB = app.adminApp.database();
-app.adminMessaging = app.adminApp.messaging();
-
-
+app.logger = require("./src/logger.js")(app);
+require("./src/firebase.js")(app);
+app.library = require("./src/library.js")(app);
 require("./src/config.js")(app);
-
-var routes = require("./src/routes.js")(app);
+require("./src/routes.js")(app);
 
 var server = app.listen(process.env.NODE_PORT, function () {
-    console.log("Listening on port %s...", server.address().port);
+    app.logger.log('info', "Listening on port %s...", server.address().port);
 });
