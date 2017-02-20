@@ -1,6 +1,6 @@
-/* esline-env node */
+/* eslint-env node */
 
-var appRouter = function appRouter(app) {
+var Router = function appRouter(app) {
   // Routes
   app.get("/", function get(req, res) {
     res.send("Hello World");
@@ -34,4 +34,4 @@ var appRouter = function appRouter(app) {
   });
 };
 
-module.exports = appRouter;
+module.exports = Router;
