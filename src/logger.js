@@ -1,10 +1,10 @@
+/* eslint-env node */
 'use strict';
 
-const winston = require('winston')
+const winston = require('winston');
 
 function Logger(app) {
   // Logging
-  const winston = require('winston')
   // winston.log('info', 'Hello distributed log files!');
   // winston.info('Hello again distributed logs');
   // winston.level = 'debug';
