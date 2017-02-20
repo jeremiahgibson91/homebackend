@@ -10,7 +10,7 @@ function Config(app) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use((req, res, next) => {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', proccess.env.URL);
+    res.setHeader('Access-Control-Allow-Origin', process.env.NODE_URL);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

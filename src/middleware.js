@@ -15,7 +15,7 @@ function Config(app) {
 
   app.use(function appUse(req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://jeremiahgibson.io');
+    res.setHeader('Access-Control-Allow-Origin', process.env.NODE_URL);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
