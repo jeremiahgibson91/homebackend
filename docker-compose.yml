@@ -9,4 +9,4 @@ services:
     environment:
      - NODE_PORT=4000
      - DEBUG=my-namespace
-     - NODE_URL=https://jeremiahgibson.io/
+     - NODE_URL=https://jeremiahgibson.io
