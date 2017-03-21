@@ -2,11 +2,12 @@
 'use strict';
 
 var firebaseAdmin = require("firebase-admin");
+var serviceAccount = require('../serviceAccountKey.json');
 
 function Firebase(app) {
   // Admin credentials
   const credentials = {
-    credential: firebaseAdmin.credential.cert("serviceAccountKey.json"),
+    credential: firebaseAdmin.credential.cert(serviceAccount),
     databaseURL: "https://homebase-2e648.firebaseio.com"
   };
 
